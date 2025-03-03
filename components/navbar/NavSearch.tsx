@@ -6,9 +6,11 @@ import { useEffect, useState } from "react";
 
 function NavSearch() {
   const searchParams = useSearchParams()
-  const {replace} = useRouter()
+  const { replace } = useRouter()
 
-  const [search, setSearch] = useState(searchParams.get('search')?.toString() || '')
+  const [search, setSearch] = useState(
+    searchParams.get('search')?.toString() || ''
+  )
 
   const handleSearch = useDebouncedCallback((value: string) => {
     const params = new URLSearchParams(searchParams)
@@ -18,7 +20,7 @@ function NavSearch() {
       params.delete('search')
     }
     replace(`/products?${params.toString()}`)
-  }, 500)
+  }, 300)
 
   useEffect(() => {
     if (!searchParams.get('search')) {
@@ -37,7 +39,6 @@ function NavSearch() {
       }}
       value={search}
     />
-
   );
 }
 
