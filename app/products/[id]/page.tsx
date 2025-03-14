@@ -9,6 +9,7 @@ import SubmitReview from '@/components/reviews/SubmitReview';
 import ProductReviews from '@/components/reviews/ProductReviews';
 import { fetchSingleProduct, findExistingReview } from '@/utils/actions';
 import { auth } from '@clerk/nextjs/server';
+import Link from 'next/link';
 
 async function SingleProductPage({ params }: { params: { id: string } }) {
   const product = await fetchSingleProduct(params.id);
@@ -22,7 +23,11 @@ async function SingleProductPage({ params }: { params: { id: string } }) {
 
   return (
     <section>
-      <BreadCrumbs name={product.name} />
+      <div className="flex justify-between">
+        <BreadCrumbs name={product.name} />
+        <Link href={`/products`} className='underline capitalize text-md'>Back to products</Link>
+      </div>
+
       <div className='mt-6 grid gap-y-8 lg:grid-cols-2 lg:gap-x-16'>
         {/* IMAGE FIRST COL */}
         <div className='relative h-full'>
